@@ -1,0 +1,82 @@
+<% title = 'Dokument'; %>
+<% currentPage = '/dokument/index'; %>
+
+<% body = `
+  <div class="documents-page">
+    <h1>Viktiga dokument för BRF Råstenen Mitt</h1>
+    
+    <p class="page-intro">
+      Som bostadsrättsinnehavare har du rätt att ta del av föreningens dokument. 
+      Här hittar du de viktigaste dokumenten som ger insikt i vår förenings verksamhet.
+    </p>
+
+    <div class="document-sections">
+      <section class="document-section">
+        <h2>Styrande dokument</h2>
+        <div class="document-grid">
+          <div class="document-card">
+            <div class="document-icon">📜</div>
+            <h3>Stadgar</h3>
+            <p>Föreningens grundläggande regler och bestämmelser</p>
+            <div class="document-meta">
+              <span class="document-date">Senast uppdaterad: 2023-09-15</span>
+              <a href="/dokument/stadgar" class="btn btn-secondary">Visa</a>
+            </div>
+          </div>
+
+          <div class="document-card">
+            <div class="document-icon">📊</div>
+            <h3>Årsredovisningar</h3>
+            <p>Ekonomisk översikt och verksamhetsberättelse</p>
+            <div class="document-meta">
+              <span class="document-date">Senaste: 2022</span>
+              <a href="/dokument/arsredovisning" class="btn btn-secondary">Visa alla</a>
+            </div>
+          </div>
+
+          <div class="document-card">
+            <div class="document-icon">📝</div>
+            <h3>Stämmoprotokoll</h3>
+            <p>Beslut och diskussioner från föreningsstämmor</p>
+            <div class="document-meta">
+              <span class="document-date">Senaste: 2023-03-20</span>
+              <a href="/dokument/stammoprotokoll" class="btn btn-secondary">Visa alla</a>
+            </div>
+          </div>
+
+          <div class="document-card">
+            <div class="document-icon">🤝</div>
+            <h3>Trivselregler</h3>
+            <p>Gemensamma regler för ett trivsamt boende</p>
+            <div class="document-meta">
+              <span class="document-date">Senast uppdaterad: 2023-01-10</span>
+              <a href="/om-oss/trivselregler" class="btn btn-secondary">Läs mer</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="document-section">
+        <h2>Ekonomisk information</h2>
+        <div class="document-grid">
+          <div class="document-card">
+            <div class="document-icon">💰</div>
+            <h3>Månadsavgifter</h3>
+            <p>Information om aktuella avgifter och betalningsrutiner</p>
+            <div class="document-meta">
+              <span class="document-date">Uppdateras kvartalsvis</span>
+              <a href="/om-oss/avgift" class="btn btn-secondary">Visa detaljer</a>
+            </div>
+          </div>
+
+    <div class="document-disclaimer">
+      <h3>Viktig information</h3>
+      <p>
+        Observera att vissa dokument kan innehålla känslig information och 
+        är därför begränsade till medlemmar. Kontakta styrelsen vid frågor.
+      </p>
+    </div>
+  </div>
+` %>
+
+<%- include('../../partials/content-template') %>

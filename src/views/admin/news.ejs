@@ -1,0 +1,272 @@
+<div class="admin-container">
+  <h1>Hantera nyheter</h1>
+  
+  <% if (locals.flash) { %>
+    <div class="alert alert-<%= flash.type %>">
+      <%= flash.text %>
+    </div>
+  <% } %>
+  
+  <div class="admin-actions">
+  
+    <a href="/admin/nyheter/ny" class="btn btn-primary">Skapa ny nyhet</a>
+    <a href="/admin/logout" class="btn-secondary logout">Logga ut</a>
+  </div>
+  
+  <% if (news && news.length > 0) { %>
+    <div class="news-list">
+      <% news.forEach(item => { %>
+        <div class="news-item card">
+          <div class="card-header">
+            <h2><%= item.title %></h2>
+            <div class="status-badge <%= item.isPublished ? 'published' : 'draft' %>">
+              <%= item.isPublished ? 'Publicerad' : 'Utkast' %>
+            </div>
+          </div>
+          
+          <div class="card-body">
+            <% if (item.summary) { %>
+              <p class="summary"><strong>Sammanfattning:</strong> <%= item.summary %></p>
+            <% } %>
+            
+            <div class="meta-info">
+              <p><strong>Publicerad:</strong> <%= new Date(item.publishDate).toLocaleDateString('sv-SE') %></p>
+              <p><strong>Synlig till:</strong> <%= new Date(item.visibleUntil).toLocaleDateString('sv-SE') %></p>
+              <p><strong>Författare:</strong> <%= item.author %></p>
+              <p><strong>Skapad:</strong> <%= new Date(item.createdAt).toLocaleDateString('sv-SE') %></p>
+            </div>
+            
+            <div class="content">
+              <strong>Innehåll:</strong>
+              <div><%- item.content %></div>
+            </div>
+          </div>
+          
+          <div class="card-footer">
+            <div class="action-buttons">
+              <!-- Länk till redigeringssidan -->
+              <a href="/admin/nyheter/<%= item._id %>/redigera" class="btn btn-warning">Redigera</a> <!-- ✅ -->
+              
+              <!-- Raderingsformulär -->
+              <form action="/admin/nyheter/<%= item._id %>/radera" method="POST" class="delete-form">
+                <button type="submit" class="btn btn-danger">Radera</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      <% }); %>
+    </div>
+  <% } else { %>
+    <div class="no-content">
+      <p>Inga nyheter hittades. Skapa din första nyhet med knappen ovan.</p>
+    </div>
+  <% } %>
+</div>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const deleteButtons = document.querySelectorAll('.delete-form button[type="submit"]')
+    
+    deleteButtons.forEach(button => {
+      button.addEventListener('click', function(event) {
+        event.preventDefault()
+        
+        const form = this.closest('form')
+        const newsTitle = this.closest('.news-item').querySelector('h2').textContent
+        
+        // Skapa en snygg modal
+        const modal = document.createElement('div')
+        modal.innerHTML = `
+          <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 1000; display: flex; align-items: center; justify-content: center;">
+            <div style="background: white; padding: 30px; border-radius: 8px; max-width: 400px; text-align: center; box-shadow: 0 4px 20px rgba(0,0,0,0.3);">
+              <h3 style="color: #dc3545; margin-bottom: 15px;">⚠️ Bekräfta radering</h3>
+              <p style="margin-bottom: 20px;">Är du säker på att du vill radera nyheten:</p>
+              <p style="font-weight: bold; margin-bottom: 20px; color: #333;">"${newsTitle}"</p>
+              <p style="margin-bottom: 25px; color: #666; font-size: 14px;">Denna åtgärd kan inte ångras.</p>
+              <div>
+                <button id="confirm-delete" style="background: #dc3545; color: white; border: none; padding: 10px 20px; border-radius: 4px; margin-right: 10px; cursor: pointer;">Radera</button>
+                <button id="cancel-delete" style="background: #6c757d; color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer;">Avbryt</button>
+              </div>
+            </div>
+          </div>
+        `
+        
+        document.body.appendChild(modal)
+        
+        // Hantera knappar
+        modal.querySelector('#confirm-delete').addEventListener('click', function() {
+          document.body.removeChild(modal)
+          form.submit()
+        })
+        
+        modal.querySelector('#cancel-delete').addEventListener('click', function() {
+          document.body.removeChild(modal)
+        })
+        
+        // Stäng vid klick utanför
+        modal.addEventListener('click', function(e) {
+          if (e.target === modal) {
+            document.body.removeChild(modal)
+          }
+        })
+      })
+    })
+  })
+  </script>
+<style>
+  .admin-container {
+    padding: 20px;
+  }
+  
+  .admin-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-start; /* Eller space-between om du vill separera mer */
+  flex-wrap: wrap; /* så att de kan bryta rad på mobil */
+  margin: 20px 0;
+}
+
+.btn-primary,
+.btn-secondary {
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  font-weight: 600;
+  text-align: center;
+  min-width: 160px;
+}
+
+.btn-primary {
+  background-color: #2E6E65;
+  color: white;
+  border: none;
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: #2E6E65;
+  border: 2px solid #2E6E65;
+}
+
+.btn-secondary.logout:hover {
+  background-color: #2E6E65;
+  color: white;
+}
+
+  .news-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .news-item {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  
+  .card-header {
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .card-header h2 {
+    margin: 0;
+    font-size: 1.5rem;
+  }
+  
+  .card-body {
+    padding: 15px;
+  }
+  
+  .card-footer {
+    padding: 15px;
+    border-top: 1px solid #ddd;
+  }
+  
+  .action-buttons {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .status-badge {
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: bold;
+  }
+  
+  .published {
+    background-color: #28a745;
+    color: white;
+  }
+  
+  .draft {
+    background-color: #ffc107;
+    color: black;
+  }
+  
+  .btn {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  
+  .btn-primary {
+    background-color: #2E6E65;
+    color: white;
+  }
+  
+  .btn-warning {
+    background-color: #ffc107;
+    color: black;
+  }
+  
+  .btn-danger {
+    background-color: #dc3545;
+    color: white;
+  }
+  
+  .no-content {
+    margin: 20px 0;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    text-align: center;
+  }
+  
+  .alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+  }
+  
+  .alert-success {
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+    color: #155724;
+  }
+  
+  .alert-danger {
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    color: #721c24;
+  }
+  @media (max-width: 600px) {
+  .admin-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .admin-actions a {
+    width: 100%;
+    text-align: center;
+  }
+}
+</style>

@@ -1,0 +1,133 @@
+/* 
+ * BRF Råstenen Mitt - Huvudsaklig CSS-fil
+ * Importerar alla CSS-moduler i rätt ordning
+ * 
+ * Ordning är viktig:
+ * 1. Variabler först
+ * 2. Reset och base
+ * 3. Layout och komponenter
+ * 4. Sidspecifika stilar
+ * 5. Utilities sist (för att ha högst specificitet)
+ */
+
+/* ========== 1. VARIABLER ========== */
+@import url('./variables.css');
+
+/* ========== 2. GRUNDLÄGGANDE STILAR ========== */
+@import url('./base.css');
+
+/* ========== 3. LAYOUT & STRUKTUR ========== */
+@import url('./layout.css');
+
+/* ========== 4. NAVIGATION ========== */
+@import url('./navigation.css');
+
+/* ========== 5. KOMPONENTER ========== */
+@import url('./components.css');
+
+/* ========== 6. SIDSPECIFIKA STILAR ========== */
+@import url('./pages.css');
+
+/* ========== 7. ADMIN-STILAR ========== */
+@import url('./admin.css');
+
+/* ========== 8. UTILITIES (sist för högst specificitet) ========== */
+@import url('./utilities.css');
+
+/* ========== EXTERNA BIBLIOTEK ========== */
+/* Font Awesome (om du använder det) */
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css');
+
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Playfair+Display:wght@700&display=swap');
+
+/* SweetAlert2 (om du använder det) */
+@import url('./lib/sweetalert2.min.css');
+
+/* ========== CUSTOM ÖVERRIDES ========== */
+/* Lägg eventuella anpassningar här som ska överrida allt annat */
+
+/* Custom scrollbar för Webkit-baserade webbläsare */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background-alt);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--secondary);
+}
+
+/* Focus styles för bättre tillgänglighet */
+*:focus {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+button:focus,
+[role="button"]:focus {
+  outline-color: var(--secondary);
+}
+
+/* Smooth scroll för hela sidan */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Print optimizations */
+@media print {
+  * {
+    background: white !important;
+    color: black !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+  
+  @page {
+    margin: 0.5in;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    break-after: avoid;
+    break-inside: avoid;
+  }
+  
+  img {
+    max-width: 100% !important;
+  }
+  
+  .no-print {
+    display: none !important;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  :root {
+    --primary: #000000;
+    --secondary: #000000;
+    --text-dark: #000000;
+    --text-medium: #000000;
+    --background: #ffffff;
+    --background-alt: #ffffff;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

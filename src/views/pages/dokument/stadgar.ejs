@@ -1,0 +1,61 @@
+<% title = 'Stadgar'; %>
+<% currentPage = '/dokument/stadgar'; %>
+
+<% body = `
+  <div class="stadgar-page">
+    <h1>Stadgar för BRF Råstenen Mitt</h1>
+    
+    <section class="stadgar-intro">
+      <h2>Skyldighet att känna till stadgar</h2>
+      <div class="content-block">
+        <p>Som medlem har du skrivit ett juridiskt kontrakt med föreningen att följa stadgarna. Därför är det avgörande att du läser igenom dem noggrant vid tillträde i föreningen och ser till att du känner till dem väl.</p>
+        
+        <div class="warning-box">
+          <h3>Viktigt att veta</h3>
+          <p>Bryter man mot stadgarna kan man i värsta fall:</p>
+          <ul>
+            <li>Förlora sin lägenhet</li>
+            <li>Bli skadeståndsskyldig</li>
+            <li>Riskera rättsliga åtgärder</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="stadgar-dokument">
+      <h2>Aktuella dokument</h2>
+      <div class="document-card">
+        <div class="document-icon">📄</div>
+        <div class="document-details">
+          <h3>Stadgar BRF Råstenen Mitt</h3>
+          <p>Senast uppdaterad: 13 juli 2023</p>
+          <a href="../files/Stadgar 230713.pdf" target="_blank" class="btn btn-primary">
+            Öppna PDF
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="stadgar-andringar">
+      <h2>Ändringar av stadgar</h2>
+      <div class="content-block">
+        <p>Eftersom stadgar är gemensamma regler kan de endast ändras genom medlemmarnas röster på stämma. Processen för stadgeändring är följande:</p>
+        
+        <ol class="process-list">
+          <li>Förslag väcks genom motion till årsmöte</li>
+          <li>Första stämman röstar om förslaget</li>
+          <li>Andra stämman bekräftar ändringen</li>
+          <li>Ändringar måste vara förenliga med svensk lag</li>
+        </ol>
+
+        <div class="tip-box">
+          <h3>Vill du föreslå en ändring?</h3>
+          <p>Kontakta styrelsen med ett sakligt underbyggt förslag. Var beredd att förklara varför ändringen är nödvändig.</p>
+          <a href="/kontakt" class="btn btn-secondary">Kontakta styrelsen</a>
+        </div>
+      </div>
+    </section>
+  </div>
+` %>
+
+<%- include('../../partials/content-template') %>

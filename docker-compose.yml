@@ -1,0 +1,27 @@
+version: "3.9"
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: brf-rastenen-app
+    env_file:
+      - .env
+    ports:
+      - "3005:3005"
+    depends_on:
+      - mongo
+    volumes:
+      - .:/usr/src/app
+    restart: unless-stopped
+    command: ["npx", "nodemon", "src/server.js"]
+
+  mongo:
+    image: mongo:7
+    container_name: brf-rastenen-mongo
+    volumes:
+      - mongodb_data:/data/db
+    environment:
+      MONGO_INITDB_DATABASE: brf-rastenen
+    restart: unless-stopped

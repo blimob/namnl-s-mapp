@@ -1,0 +1,15 @@
+@media (max-width: 768px) {
+  .hero-content {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-text {
+    order: 1;
+    text-align: center;
+  }
+
+  .hero-image {
+    order: 0;
+    margin-bottom: 1.5rem;
+  }
+}

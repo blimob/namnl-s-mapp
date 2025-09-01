@@ -1,0 +1,317 @@
+/* 
+ * BRF Råstenen Mitt - Navigation
+ * Header, meny och navigationselement
+ */
+
+/* Header */
+.main-header {
+  background-color: var(--primary);
+  padding: var(--spacing-md) 0;
+  box-shadow: var(--shadow-md);
+  position: sticky;
+  top: 0;
+  z-index: var(--z-sticky);
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1rem; /* Lägg till padding för mobil */
+}
+
+/* Logo */
+.logo a {
+  color: white;
+  font-family: var(--font-family-heading);
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  transition: color var(--transition-normal);
+  text-decoration: none;
+}
+
+.logo a:hover {
+  color: var(--background-alt);
+}
+
+/* Main navigation */
+.main-nav {
+  position: relative;
+}
+
+/* Hamburger menu (mobil) */
+.hamburger-menu {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 21px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  z-index: calc(var(--z-dropdown) + 1); /* Högre z-index */
+}
+
+.hamburger-menu span {
+  display: block;
+  height: 3px;
+  width: 100%;
+  background-color: white;
+  border-radius: 3px;
+  transition: all var(--transition-normal);
+}
+
+/* Hamburger animation */
+.hamburger-menu.active span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.hamburger-menu.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger-menu.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(7px, -6px);
+}
+
+/* Navigation links */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-lg);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links li {
+  position: relative;
+}
+
+.nav-links li a {
+  color: white;
+  font-weight: 600;
+  padding: var(--spacing-sm) 0;
+  position: relative;
+  transition: color var(--transition-normal);
+  text-decoration: none;
+}
+
+.nav-links li a:hover,
+.nav-links li a.active {
+  color: var(--secondary);
+}
+
+/* Active link indicator (desktop) */
+@media (min-width: 769px) {
+  .nav-links li a.active::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--secondary);
+  }
+
+  /* Hover underline effect */
+  .nav-links li a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -2px;
+    left: 0;
+    background-color: var(--secondary);
+    transition: width var(--transition-normal);
+  }
+
+  .nav-links li a:hover::after {
+    width: 100%;
+  }
+}
+
+/* Login/Styrelse button */
+.login-link a {
+  background-color: var(--secondary);
+  color: white !important;
+  padding: var(--spacing-sm) var(--spacing-md) !important;
+  border-radius: var(--border-radius-sm);
+  transition: background-color var(--transition-normal);
+  display: inline-block;
+}
+
+.login-link a:hover {
+  background-color: #c05a42;
+  color: white !important;
+}
+
+.login-link a::after {
+  display: none !important;
+}
+
+/* Dropdown menu */
+.dropdown {
+  position: relative;
+}
+
+.dropdown > a::after {
+  content: "▼";
+  font-size: 0.6em;
+  margin-left: var(--spacing-sm);
+  vertical-align: middle;
+  transition: transform var(--transition-normal);
+  display: inline-block;
+}
+
+.dropdown:hover > a::after {
+  transform: rotate(180deg);
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: var(--primary);
+  min-width: 250px;
+  box-shadow: var(--shadow-lg);
+  z-index: var(--z-dropdown);
+  border-radius: 0 0 var(--border-radius-sm) var(--border-radius-sm);
+  padding: var(--spacing-md);
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity var(--transition-normal), transform var(--transition-normal);
+}
+
+/* Show dropdown on hover (desktop) */
+@media (min-width: 769px) {
+  .dropdown:hover .dropdown-content {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* FIXAD MOBIL NAVIGATION */
+@media (max-width: 768px) {
+  .hamburger-menu {
+    display: flex;
+  }
+
+  /* Huvudfix: Ändrad positionering och visning */
+  .nav-links {
+    position: fixed;
+    top: 0;
+    left: -100%; /* Start utanför skärmen till vänster */
+    width: 80%; /* Ta inte upp hela bredden */
+    max-width: 300px;
+    height: 100vh;
+    flex-direction: column;
+    background-color: var(--primary);
+    padding: 80px var(--spacing-md) var(--spacing-md); /* Plats för header */
+    box-shadow: 2px 0 10px rgba(0,0,0,0.3);
+    transition: left var(--transition-normal);
+    z-index: var(--z-dropdown);
+    gap: 0;
+    overflow-y: auto;
+  }
+
+  /* Visa menyn */
+  .nav-links.show {
+    left: 0; /* Slide in från vänster */
+  }
+
+  /* Overlay för att stänga menyn */
+  .nav-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: calc(var(--z-dropdown) - 1);
+  }
+
+  .nav-overlay.show {
+    display: block;
+  }
+
+  .nav-links li {
+    width: 100%;
+    margin: 0;
+  }
+
+  .nav-links li a {
+    display: block;
+    padding: var(--spacing-md);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .nav-links li:last-child a {
+    border-bottom: none;
+  }
+
+  .login-link {
+    margin-top: var(--spacing-md);
+  }
+
+  .login-link a {
+    text-align: center;
+    width: 100%;
+  }
+
+  /* Mobile dropdown */
+  .dropdown-content {
+    position: static;
+    background-color: rgba(255, 255, 255, 0.05);
+    box-shadow: none;
+    width: 100%;
+    display: none;
+    padding: 0 0 var(--spacing-sm) var(--spacing-md);
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  
+  .dropdown-section {
+    margin-bottom: var(--spacing-sm);
+  }
+  
+  .dropdown-section h4 {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: var(--font-size-sm);
+    margin-top: var(--spacing-sm);
+  }
+  
+  .dropdown.show .dropdown-content {
+    display: block;
+  }
+  
+  .dropdown > a::after {
+    float: right;
+    transition: transform var(--transition-normal);
+  }
+  
+  .dropdown.show > a::after {
+    transform: rotate(180deg);
+  }
+
+  /* Prevent body scroll when menu is open */
+  body.nav-open {
+    overflow: hidden;
+  }
+}
+
+/* Focus styles for accessibility */
+.hamburger-menu:focus {
+  outline: 2px solid white;
+  outline-offset: 2px;
+}
+
+.nav-links a:focus {
+  outline: 2px solid var(--secondary);
+  outline-offset: 2px;
+}

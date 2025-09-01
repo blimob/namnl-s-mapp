@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+ 
+  <meta name="description" content="<%= typeof description !== 'undefined' ? description : 'BRF Råstenen Mitts officiella webbplats' %>">
+  <link rel="stylesheet" href="/css/variables.css">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/layout.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/navigation.css">
+  <link rel="stylesheet" href="/css/pages/home.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="main-header">
+    <div class="container">
+      <div class="header-content">
+        <div class="logo">
+          <a href="/">BRF Råstenen Mitt</a>
+        </div>
+        
+        <nav class="main-nav">
+          <div class="hamburger-menu">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          
+          <ul class="nav-links">
+            <li><a href="/" class="<%= currentPage === '/' ? 'active' : '' %>">Hem</a></li>
+            
+            <li class="dropdown">
+              <a href="/om-oss" class="<%= currentPage.startsWith('/om-oss') ? 'active' : '' %>">Om föreningen</a>
+              <div class="dropdown-content">
+                <div class="dropdown-section">
+                  <h4>Föreningen</h4>
+                  <ul>
+                    <li><a href="/om-oss/avgift">Månadsavgift & avier</a></li>
+                    <li><a href="/om-oss/bostadsratt">Att bo i bostadsrätt</a></li>
+                    <li><a href="/om-oss/foreningsstamma">Föreningsstämma</a></li>
+                    <li><a href="/om-oss/maklarinfo">Mäklarinfo</a></li>
+                    <li><a href="/om-oss/reklamation">Reklamationsanvisningar</a></li>
+                    <li><a href="/om-oss/skotsel">Skötselanvisningar</a></li>
+                    <li><a href="/om-oss/styrelse">Styrelse</a></li>
+                    <li><a href="/om-oss/trivselregler">Trivselregler</a></li>
+                  </ul>
+                </div>
+              </div>
+            </li>
+            
+            <li class="dropdown">
+              <a href="/dokument" class="<%= currentPage.startsWith('/dokument') ? 'active' : '' %>">Dokument</a>
+              <div class="dropdown-content">
+                <div class="dropdown-section">
+                  <h4>Regler</h4>
+                  <ul>
+                    <li><a href="/dokument/andrahand">Andrahandsuthyrning</a></li>
+                    <li><a href="/dokument/brandskydd">Brandskydd</a></li>
+                    <li><a href="/dokument/forsakring">Försäkring</a></li>
+                    <li><a href="/dokument/stadgar">Stadgar</a></li>
+                    <li><a href="/dokument/arsredovisning">Årsredovisning</a></li>
+                    <li><a href="/dokument/stammoprotokoll">Stämmoprotokoll</a></li>
+                  </ul>
+                </div>
+              </div>
+            </li>
+            
+            <li><a href="/nyheter" class="<%= currentPage === '/nyheter' ? 'active' : '' %>">Nyheter</a></li>
+            <li><a href="/kontakt" class="<%= currentPage === '/kontakt' ? 'active' : '' %>">Kontakt</a></li>
+            <li class="login-link"><a href="/admin/login">Styrelse</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <%- body %>
+  </main>
+
+  <footer class="main-footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-info">
+          <h3>BRF Råstenen Mitt</h3>
+          <p>Hemvägen 18 & 20<br>393 61 Kalmar</p>
+          <p>Org.nr: 769638-6874</p>
+        </div>
+        
+        <div class="footer-links">
+          <h3>Snabblänkar</h3>
+          <ul>
+            <li><a href="/dokument">Dokument</a></li>
+            <li><a href="/kontakt">Kontakta styrelsen</a></li>
+            <li><a href="/admin/login">Styrelseinloggning</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="copyright">
+        <p>&copy; <%= new Date().getFullYear() %> BRF Råstenen Mitt. Alla rättigheter förbehållna.</p>
+      </div>
+    </div>
+  </footer>
+  
+  <%- include('../partials/nav') %>
+  <script src="/js/main.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const consent = localStorage.getItem('cookieConsent')
+  
+      if (!consent) {
+        Swal.fire({
+          title: 'Cookies för en bättre upplevelse',
+          html: `
+            Vi använder cookies för att analysera trafik och förbättra användarupplevelsen. Du kan välja att acceptera eller neka.
+            <br><br>
+            <a href="/cookies-policy" target="_blank">Läs mer om vår cookiepolicy</a>
+          `,
+          icon: 'info',
+          showCancelButton: true,
+          confirmButtonText: 'Acceptera',
+          cancelButtonText: 'Neka',
+          allowOutsideClick: false,
+          allowEscapeKey: false
+        }).then((result) => {
+          if (result.isConfirmed) {
+            localStorage.setItem('cookieConsent', 'accepted')
+            enableOptionalCookies() // Laddar t.ex. Google Analytics
+          } else {
+            localStorage.setItem('cookieConsent', 'denied')
+          }
+        })
+      } else if (consent === 'accepted') {
+        enableOptionalCookies()
+      }
+  
+      function enableOptionalCookies() {
+        // Ladda tredjepartsskript här, t.ex. Google Analytics:
+        const script = document.createElement('script')
+        script.src = 'https://www.googletagmanager.com/gtag/js?id=G-2QBWMRGYR5'
+        script.async = true
+        document.head.appendChild(script)
+  
+        window.dataLayer = window.dataLayer || []
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date())
+        gtag('config', 'G-2QBWMRGYR5')
+      }
+    })
+  </script>
+</body>
+</html>

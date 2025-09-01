@@ -1,0 +1,113 @@
+.before_script_ssh_setup: &before_script_ssh_setup
+  - apk update && apk add openssh-client
+  - eval $(ssh-agent -s)
+  - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
+  - mkdir -p /root/.ssh
+  - chmod 700 /root/.ssh
+  - touch /root/.ssh/known_hosts
+  - chmod 600 /root/.ssh/known_hosts
+  - ssh-keyscan -H "$PRODUCTION_HOST" >> /root/.ssh/known_hosts
+
+image: docker:27-cli
+
+stages:
+  - test
+  - build
+  - deploy
+
+build-job:
+  stage: build
+  script:
+    - echo "Compiling the code..."
+    - sleep 2
+    - echo "Compile complete."
+
+unit-test-job:
+  stage: test
+  image: node:20
+  script:
+    - echo "Running unit tests..."
+    - npm ci
+    - npm run test
+    - echo "Code coverage is 90%"
+
+lint-test-job:
+  stage: test
+  image: node:18-alpine
+  cache:
+    paths:
+      - node_modules/
+  script:
+    - echo "Running ESLint..."
+    - npm ci --quiet
+    - npm run lint
+  artifacts:
+    paths:
+      - eslint-report.json
+    reports:
+      codequality: eslint-report.json
+    when: always
+    expire_in: 1 week
+
+deploy_production_job:
+  stage: deploy
+  environment:
+    name: production
+    url: https://cscloud7-203.lnu.se/
+  variables:
+    REMOTE_HOST: cscloud7-203.lnu.se
+    DOCKER_HOST: ssh://ubuntu@$PRODUCTION_HOST
+  before_script: *before_script_ssh_setup
+  script:
+    - echo "🚀 Deploying to production..."
+    - |
+      ssh ubuntu@$PRODUCTION_HOST '
+        set -e
+        
+        echo "📁 Setting up project directory..."
+        if [ ! -d "/var/www/myapp" ]; then
+          git clone git@gitlab.lnu.se:1dv613/student/bm222mr/projects/brf-rastenen.git /var/www/myapp
+        fi
+        
+        cd /var/www/myapp
+        echo "🔄 Pulling latest code..."
+        git pull origin main
+        
+        # ✅ Exportera miljövariabler för Docker Compose
+        echo "🔧 Setting up environment variables..."
+        export SESSION_SECRET="'"$SESSION_SECRET"'"
+        export FIREBASE_SERVICE_ACCOUNT="'"$FIREBASE_SERVICE_ACCOUNT"'"
+        
+        # ✅ Debug - kontrollera variabler
+        echo "🔍 SESSION_SECRET set: ${SESSION_SECRET:+YES}"
+        echo "🔍 FIREBASE_SERVICE_ACCOUNT length: ${#FIREBASE_SERVICE_ACCOUNT}"
+        
+        # ✅ Stoppa gamla containers
+        echo "🛑 Stopping old containers..."
+        docker compose -f docker-compose.production.yml down --remove-orphans || true
+        
+        # ✅ Starta nya containers
+        echo "🐳 Starting new containers..."
+        docker compose -f docker-compose.production.yml up --build -d
+        
+        # ✅ Vänta och kontrollera status
+        echo "⏳ Waiting for containers to start..."
+        sleep 20
+        
+        echo "📋 Container status:"
+        docker compose -f docker-compose.production.yml ps
+        
+        echo "📝 Application logs:"
+        docker compose -f docker-compose.production.yml logs --tail=15 app
+        
+        # ✅ Rensa gamla images
+        echo "🧹 Cleaning up old images..."
+        docker image prune -f || true
+        
+        echo "✅ Deployment completed!"
+      '
+  only:
+    - main
+  needs:
+    - unit-test-job
+    - lint-test-job

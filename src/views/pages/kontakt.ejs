@@ -1,0 +1,203 @@
+<% title = ''; %>
+<% currentPage = 'Kontakt'; %>
+
+<% body = `
+  <div class="contact-container">
+    <div class="contact-intro">
+      <h2>Kontakta styrelsen</h2>
+      <p>Hittar du inte den information du letar efter på hemsidan? Du är alltid välkommen att kontakta styrelsen med frågor, idéer eller om du vill hjälpa till med något i föreningen.</p>
+      
+      <div class="contact-email">
+        <a href="mailto:rastenenmittkalmar@hotmail.com" class="email-button">
+          📧 Skicka email till styrelsen
+        </a>
+      </div>
+    </div>
+
+    <div class="board-section">
+      <h3>Nuvarande styrelse</h3>
+      
+      <div class="board-grid">
+        <div class="board-member highlight">
+          <span class="member-role">Ordförande</span>
+          <span class="member-name">Linus Moberg</span>
+        </div>
+        
+        <div class="board-member">
+          <span class="member-role">Kassör</span>
+          <span class="member-name">Lisbeth Delin</span>
+        </div>
+        
+        <div class="board-member">
+          <span class="member-role">Ledamot</span>
+          <span class="member-name">Håkan Löfgren</span>
+        </div>
+        
+        <div class="board-member">
+          <span class="member-role">Ledamot</span>
+          <span class="member-name">Moa Markusson Moberg</span>
+        </div>
+        
+        <div class="board-member secondary">
+          <span class="member-role">Suppleant</span>
+          <span class="member-name">Blinera Moberg</span>
+        </div>
+        
+        <div class="board-member secondary">
+          <span class="member-role">Suppleant</span>
+          <span class="member-name">Dusica Ristic</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    .contact-container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    .contact-intro {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .contact-intro h2 {
+      color: #2e6e65;
+      margin-bottom: 1rem;
+    }
+
+    .contact-email {
+      margin-top: 2rem;
+    }
+
+    .email-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: #2e6e65;
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 6px rgba(46, 110, 101, 0.2);
+    }
+
+    .email-button:hover {
+      background: #246054;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(46, 110, 101, 0.3);
+    }
+
+    .board-section h3 {
+      color: #2e6e65;
+      margin-bottom: 2rem;
+      text-align: center;
+      font-size: 1.8rem;
+    }
+
+    .board-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .board-member {
+      background: white;
+      border: 1px solid #e0e0e0;
+      border-radius: 10px;
+      padding: 1.5rem;
+      text-align: center;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .board-member::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: #2e6e65;
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+    }
+
+    .board-member:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+    }
+
+    .board-member:hover::before {
+      transform: scaleX(1);
+    }
+
+    .board-member.highlight {
+      background: linear-gradient(135deg, #f0f9f8 0%, #e8f5f3 100%);
+      border-color: #2e6e65;
+      transform: scale(1.02);
+    }
+
+    .board-member.highlight::before {
+      transform: scaleX(1);
+      height: 6px;
+    }
+
+    .board-member.secondary {
+      background: #f8f9fa;
+      border-style: dashed;
+      opacity: 0.9;
+    }
+
+    .member-role {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #2e6e65;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 0.75rem;
+      padding: 0.25rem 0.75rem;
+      background: rgba(46, 110, 101, 0.1);
+      border-radius: 20px;
+      display: inline-block;
+    }
+
+    .member-name {
+      display: block;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #333;
+      margin-top: 0.5rem;
+    }
+
+    @media (max-width: 768px) {
+      .contact-container {
+        padding: 1rem;
+      }
+      
+      .board-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+      
+      .board-member {
+        padding: 1.25rem;
+      }
+
+      .email-button {
+        padding: 0.875rem 1.5rem;
+        font-size: 1rem;
+      }
+    }
+  </style>
+` %>
+
+<%- include('../partials/content-template') %>

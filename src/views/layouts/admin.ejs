@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="sv">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>
+    <%= title %> | BRF Råstenen Mitt
+  </title>
+  <meta name="description" content="<%= typeof description !== 'undefined' ? description : 'Administration för BRF Råstenen Mitt' %>">
+
+  <link rel="stylesheet" href="/css/admin.css">
+  <link rel="stylesheet" href="/css/variables.css">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/layout.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/navigation.css">
+  <link rel="stylesheet" href="/css/pages/home.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+  <link rel="stylesheet" href="/css/lib/sweetalert2.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <header class="admin-header">
+    <div class="container">
+      <div class="header-content">
+        <div class="logo">
+          <a href="/" style="color: white; text-decoration: none;">BRF Råstenen Mitt - Admin</a>
+        </div>
+
+        <nav class="main-nav" id="mainNav">
+          <div class="hamburger-menu" id="mobileMenuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        
+          <ul class="nav-links">
+            <li><a href="/">Hem</a></li>
+            <li class="dropdown">
+              <a href="/om-oss">Om föreningen</a>
+              <div class="dropdown-content">
+                <ul>
+                  <li><a href="/om-oss/bostadsratt">Bostadsrätt</a></li>
+                  <li><a href="/om-oss/styrelse">Styrelse</a></li>
+                  <li><a href="/om-oss/foreningsstamma">Föreningsstämma</a></li>
+                </ul>
+              </div>
+            </li>
+            <li><a href="/kontakt">Kontakt</a></li>
+            <li class="login-link"><a href="/admin/login">Styrelse</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main class="admin-main">
+    <% if (locals.flash && flash.type) { %>
+      <div class="flash-message flash-<%= flash.type %>">
+        <%= flash.text %>
+      </div>
+      <% } %>
+
+        <%- body %>
+  </main>
+
+  <footer class="admin-footer">
+    <div class="container">
+      <p>&copy; <%= new Date().getFullYear() %> BRF Råstenen Mitt. Alla rättigheter förbehållna.</p>
+    </div>
+  </footer>
+
+  <style>
+    /* Global layout */
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      background-color: #f8f9fa;
+    }
+
+    /* Header styling */
+    .admin-header {
+      background-color: #2e6e65;
+      color: white;
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    .logo a {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: white;
+      text-decoration: none;
+    }
+
+    /* Mobile menu toggle */
+    .mobile-menu-toggle {
+      display: none;
+      flex-direction: column;
+      justify-content: space-around;
+      width: 30px;
+      height: 30px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      position: relative;
+      z-index: 1002;
+    }
+
+    .mobile-menu-toggle span {
+      width: 100%;
+      height: 3px;
+      background: white;
+      border-radius: 2px;
+      transition: all 0.3s ease;
+      transform-origin: center;
+    }
+
+    .mobile-menu-toggle.active span:nth-child(1) {
+      transform: rotate(45deg) translate(6px, 6px);
+    }
+
+    .mobile-menu-toggle.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .mobile-menu-toggle.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(6px, -6px);
+    }
+
+    /* Navigation */
+    .admin-nav {
+      display: block;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      gap: 1.5rem;
+      align-items: center;
+    }
+
+    .nav-links li a {
+      color: white;
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      transition: all 0.3s ease;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .nav-links li a:hover {
+      background: rgba(255, 255, 255, 0.1);
+      transform: translateY(-1px);
+    }
+
+    .logout-link {
+      background: rgba(255, 255, 255, 0.1) !important;
+      border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    }
+
+    .logout-link:hover {
+      background: rgba(255, 255, 255, 0.2) !important;
+    }
+
+    /* Main content */
+    .admin-main {
+      flex: 1;
+      padding: 2rem 1rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    /* Footer */
+    .admin-footer {
+      background-color: #2e6e65;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      margin-top: auto;
+    }
+
+    .admin-footer p {
+      margin: 0;
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
+
+    /* Flash messages */
+    .flash-message {
+      padding: 1rem 1.5rem;
+      border-radius: 8px;
+      margin-bottom: 2rem;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .flash-success {
+      background: linear-gradient(135deg, #d4edda, #c3e6cb);
+      border: 1px solid #b8dabd;
+      color: #155724;
+    }
+
+    .flash-success::before {
+      content: "✅";
+    }
+
+    .flash-danger {
+      background: linear-gradient(135deg, #f8d7da, #f5c6cb);
+      border: 1px solid #f1b2b8;
+      color: #721c24;
+    }
+
+    .flash-danger::before {
+      content: "❌";
+    }
+
+    .flash-warning {
+      background: linear-gradient(135deg, #fff3cd, #fdeaa7);
+      border: 1px solid #f6e05e;
+      color: #856404;
+    }
+
+    .flash-warning::before {
+      content: "⚠️";
+    }
+
+    .flash-info {
+      background: linear-gradient(135deg, #d1ecf1, #bee5eb);
+      border: 1px solid #b8daff;
+      color: #0c5460;
+    }
+
+    .flash-info::before {
+      content: "ℹ️";
+    }
+
+    /* Mobile responsive */
+    @media (max-width: 768px) {
+      .mobile-menu-toggle {
+        display: flex;
+      }
+
+      @media (max-width: 768px) {
+        .admin-nav {
+          position: fixed;
+          top: 0;
+          left: -100%;
+          /* Dölj till vänster */
+          width: 80%;
+          max-width: 300px;
+          height: 100vh;
+          flex-direction: column;
+          background-color: var(--primary);
+          padding: 80px var(--spacing-md) var(--spacing-md);
+          box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
+          transition: left 0.3s ease;
+          z-index: 999;
+          gap: 0;
+          overflow-y: auto;
+        }
+
+        .admin-nav.active {
+          left: 0;
+          /* ← detta är det som faktiskt visar menyn */
+        }
+      }
+
+      .nav-links {
+        flex-direction: column;
+        padding: 1rem;
+        gap: 0;
+      }
+
+      .nav-links li {
+        width: 100%;
+      }
+
+      .nav-links li a {
+        display: flex;
+        width: 100%;
+        padding: 1rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 0;
+        font-size: 1.1rem;
+        justify-content: flex-start;
+      }
+
+      .nav-links li:last-child a {
+        border-bottom: none;
+      }
+
+      .nav-links li a:hover {
+        background: rgba(255, 255, 255, 0.15);
+        transform: none;
+      }
+
+      .logout-link {
+        background: rgba(231, 76, 60, 0.2) !important;
+        border: 1px solid rgba(231, 76, 60, 0.3) !important;
+        margin-top: 0.5rem;
+        border-radius: 6px !important;
+      }
+
+      .admin-main {
+        padding: 1rem 0.5rem;
+      }
+
+      .admin-footer {
+        padding: 0.75rem;
+      }
+
+      .admin-footer p {
+        font-size: 0.8rem;
+      }
+
+      /* Prevent body scroll when menu is open */
+      body.menu-open {
+        overflow: hidden;
+      }
+
+      /* Flash messages on mobile */
+      .flash-message {
+        padding: 0.875rem 1rem;
+        font-size: 0.9rem;
+      }
+    }
+
+    /* Larger screens */
+    @media (min-width: 769px) {
+      .nav-links li a {
+        font-size: 0.95rem;
+      }
+
+      .admin-main {
+        padding: 2.5rem 1rem;
+      }
+    }
+
+    /* Extra large screens */
+    @media (min-width: 1200px) {
+      .admin-main {
+        padding: 3rem 2rem;
+      }
+    }
+
+    /* Focus states for accessibility */
+    .mobile-menu-toggle:focus {
+      outline: 2px solid rgba(255, 255, 255, 0.5);
+      outline-offset: 2px;
+    }
+
+    .nav-links li a:focus {
+      outline: 2px solid rgba(255, 255, 255, 0.5);
+      outline-offset: 2px;
+    }
+
+    /* Print styles */
+    @media print {
+
+      .admin-header,
+      .admin-footer,
+      .mobile-menu-toggle {
+        display: none;
+      }
+
+      .admin-main {
+        padding: 0;
+        margin: 0;
+        max-width: none;
+      }
+
+      .flash-message {
+        border: 1px solid #000;
+        background: #fff !important;
+        color: #000 !important;
+      }
+    }
+  </style>
+
+  <script>
+    // JavaScript för mobil-meny och förbättrad UX
+    document.addEventListener('DOMContentLoaded', function () {
+      const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+      const adminNav = document.getElementById('adminNav');
+
+      if (mobileMenuToggle && adminNav) {
+        // Toggle menu on button click
+        mobileMenuToggle.addEventListener('click', function (e) {
+          e.stopPropagation();
+          const isActive = mobileMenuToggle.classList.contains('active');
+
+          if (isActive) {
+            closeMenu();
+          } else {
+            openMenu();
+          }
+        });
+
+        // Open menu function
+        function openMenu() {
+          mobileMenuToggle.classList.add('active');
+          adminNav.classList.add('active');
+          document.body.classList.add('menu-open');
+          mobileMenuToggle.setAttribute('aria-expanded', 'true');
+        }
+
+        // Close menu function
+        function closeMenu() {
+          mobileMenuToggle.classList.remove('active');
+          adminNav.classList.remove('active');
+          document.body.classList.remove('menu-open');
+          mobileMenuToggle.setAttribute('aria-expanded', 'false');
+        }
+
+        // Close menu when clicking on navigation links
+        const navLinks = adminNav.querySelectorAll('a');
+        navLinks.forEach(link => {
+          link.addEventListener('click', function () {
+            closeMenu();
+          });
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function (event) {
+          if (!mobileMenuToggle.contains(event.target) && !adminNav.contains(event.target)) {
+            closeMenu();
+          }
+        });
+
+        // Close menu with Escape key
+        document.addEventListener('keydown', function (event) {
+          if (event.key === 'Escape' && adminNav.classList.contains('active')) {
+            closeMenu();
+            mobileMenuToggle.focus(); // Return focus to button
+          }
+        });
+
+        // Handle window resize
+        window.addEventListener('resize', function () {
+          if (window.innerWidth > 768 && adminNav.classList.contains('active')) {
+            closeMenu();
+          }
+        });
+
+        // Initialize ARIA attributes
+        mobileMenuToggle.setAttribute('aria-expanded', 'false');
+        mobileMenuToggle.setAttribute('aria-controls', 'adminNav');
+      }
+
+      // Auto-hide flash messages after 5 seconds
+      const flashMessages = document.querySelectorAll('.flash-message');
+      flashMessages.forEach(message => {
+        setTimeout(() => {
+          message.style.opacity = '0';
+          message.style.transform = 'translateY(-10px)';
+          setTimeout(() => {
+            message.style.display = 'none';
+          }, 300);
+        }, 5000);
+      });
+    });
+  </script>
+
+  <script src="/js/lib/sweetalert2.all.min.js" defer></script>
+  <script src="/js/main.js" defer></script>
+</body>
+
+</html>

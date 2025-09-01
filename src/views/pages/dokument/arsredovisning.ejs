@@ -1,0 +1,28 @@
+<% title = 'Årsredovisning'; %>
+<% currentPage = '/dokument/arsredovisning'; %>
+
+<% body = `
+  <section class="arsredovisning-container">
+    <div class="arsredovisning-intro">
+      <p>
+        I årsredovisningen hittar du mer information om föreningens ekonomi – till exempel intäkter, kostnader och belåning.
+        Förvaltningsberättelsen i början av dokumentet beskriver både genomförda åtgärder och planerade insatser.
+      </p>
+      <p>
+        Den ekonomiska planen är en budget och prognos för föreningens första verksamhetsår.
+        Den har godkänts av intygsgivare som är certifierade av Boverket och är registrerad hos Bolagsverket.
+      </p>
+    </div>
+
+    <div class="document-download-section">
+      <h3>Ladda ned</h3>
+      <a href="/files/Förvaltningsberättelse.pdf" target="_blank" class="document-link">
+        <i class="fa-solid fa-file-pdf"></i>
+        <span>Årsredovisning 2024</span>
+        <small>PDF</small>
+      </a>
+    </div>
+  </section>
+` %>
+
+<%- include('../../partials/content-template') %>

@@ -1,0 +1,433 @@
+<% title = 'Stämmoprotokoll'; %>
+<% currentPage = '/dokument/stammoprotokoll'; %>
+
+<% body = `
+<div class="stammoprotokoll-page">
+  <div class="page-header-section">
+    <p class="page-description">Här hittar du protokoll från våra föreningsstämmor. Protokollen innehåller viktiga beslut som påverkar alla medlemmar i föreningen.</p>
+  </div>
+
+  <div class="info-section">
+    <div class="info-card highlight">
+      <div class="info-icon">📋</div>
+      <div class="info-content">
+        <h3>Vad är ett stämmoprotokoll?</h3>
+        <p>Stämmoprotokoll är officiella dokument som dokumenterar alla beslut som fattas på föreningens årsstämma eller extra stämmor. De innehåller information om närvarande medlemmar, diskussioner och röstningsresultat.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="documents-section">
+    <h2>Tillgängliga protokoll</h2>
+    
+    <div class="protocol-grid">
+      <div class="protocol-card">
+        <div class="card-header">
+          <div class="year-badge">2024</div>
+          <span class="protocol-type">Årsstämma</span>
+        </div>
+        <div class="card-body">
+          <h3>Protokoll från årsstämma 2024</h3>
+          <div class="protocol-meta">
+            <span class="date">📅 Datum: 15 maj 2024</span>
+            <span class="pages">📄 Sidor: 8</span>
+          </div>
+          <p class="protocol-summary">Ordinarie årsstämma med val av ny styrelse och beslut om renovering av gemensamma utrymmen.</p>
+          <a href="../files/Stämmoprotokoll_2024.pdf" target="_blank" class="download-button">
+            <i class="fa-solid fa-file-pdf"></i>
+            <span>Ladda ner protokoll</span>
+            <i class="fa-solid fa-download"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="protocol-card">
+        <div class="card-header">
+          <div class="year-badge">2023</div>
+          <span class="protocol-type">Årsstämma</span>
+        </div>
+        <div class="card-body">
+          <h3>Protokoll från årsstämma 2023</h3>
+          <div class="protocol-meta">
+            <span class="date">📅 Datum: 20 maj 2023</span>
+            <span class="pages">📄 Sidor: 6</span>
+          </div>
+          <p class="protocol-summary">Behandling av årsredovisning 2022 och beslut om oförändrad månadsavgift.</p>
+          <a href="../files/Stämmoprotokoll_2023.pdf" target="_blank" class="download-button">
+            <i class="fa-solid fa-file-pdf"></i>
+            <span>Ladda ner protokoll</span>
+            <i class="fa-solid fa-download"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="protocol-card">
+        <div class="card-header">
+          <div class="year-badge">2022</div>
+          <span class="protocol-type">Årsstämma</span>
+        </div>
+        <div class="card-body">
+          <h3>Protokoll från årsstämma 2022</h3>
+          <div class="protocol-meta">
+            <span class="date">📅 Datum: 25 maj 2022</span>
+            <span class="pages">📄 Sidor: 7</span>
+          </div>
+          <p class="protocol-summary">Föreningens andra ordinarie årsstämma med fastställande av nya stadgar.</p>
+          <a href="../files/Stämmoprotokoll_2022.pdf" target="_blank" class="download-button">
+            <i class="fa-solid fa-file-pdf"></i>
+            <span>Ladda ner protokoll</span>
+            <i class="fa-solid fa-download"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="additional-info">
+    <div class="info-box">
+      <h3>💡 Bra att veta</h3>
+      <ul>
+        <li>Protokollen blir tillgängliga cirka 2-3 veckor efter stämman</li>
+        <li>Alla medlemmar har rätt att ta del av stämmoprotokoll</li>
+        <li>Originalprotokollen förvaras hos styrelsen</li>
+        <li>Vid frågor om innehållet, kontakta styrelsen</li>
+      </ul>
+    </div>
+
+    <div class="info-box">
+      <h3>🔍 Söker du något specifikt?</h3>
+      <p>Om du letar efter information om ett specifikt beslut eller diskussion, kan du använda sökfunktionen i PDF-läsaren efter att du öppnat protokollet.</p>
+    </div>
+  </div>
+
+  <div class="contact-section">
+    <div class="contact-card">
+      <div class="contact-icon">💬</div>
+      <h3>Har du frågor?</h3>
+      <p>Saknar du något protokoll eller har frågor om innehållet i stämmoprotokollen?</p>
+      <a href="mailto:rastenenmittkalmar@hotmail.com" class="contact-button">
+        📧 Kontakta styrelsen
+      </a>
+    </div>
+  </div>
+</div>
+
+<style>
+  .stammoprotokoll-page {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+
+  .page-header-section {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .page-header-section h1 {
+    color: #2e6e65;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+  }
+
+  .page-description {
+    color: #666;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .info-section {
+    margin-bottom: 3rem;
+  }
+
+  .info-card {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+  }
+
+  .info-card.highlight {
+    background: linear-gradient(135deg, #f8fffe 0%, #f0f9f8 100%);
+    border: 1px solid rgba(46, 110, 101, 0.2);
+  }
+
+  .info-icon {
+    font-size: 2.5rem;
+    flex-shrink: 0;
+  }
+
+  .info-content h3 {
+    color: #2e6e65;
+    margin-bottom: 0.5rem;
+    font-size: 1.3rem;
+  }
+
+  .info-content p {
+    color: #555;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .documents-section {
+    margin-bottom: 3rem;
+  }
+
+  .documents-section h2 {
+    color: #2e6e65;
+    margin-bottom: 2rem;
+    font-size: 1.8rem;
+    text-align: center;
+  }
+
+  .protocol-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 2rem;
+  }
+
+  .protocol-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+    border: 1px solid #e9ecef;
+  }
+
+  .protocol-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+    border-color: #2e6e65;
+  }
+
+  .card-header {
+    background: linear-gradient(135deg, #2e6e65 0%, #4a9d93 100%);
+    padding: 1rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .year-badge {
+    background: white;
+    color: #2e6e65;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 1.1rem;
+  }
+
+  .protocol-type {
+    color: white;
+    font-size: 0.9rem;
+    opacity: 0.9;
+  }
+
+  .card-body {
+    padding: 1.5rem;
+  }
+
+  .card-body h3 {
+    color: #333;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+  }
+
+  .protocol-meta {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .protocol-meta span {
+    color: #666;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+  }
+
+  .protocol-summary {
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
+  }
+
+  .download-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    background: #2e6e65;
+    color: white;
+    text-decoration: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+  }
+
+  .download-button:hover {
+    background: #246054;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(46, 110, 101, 0.3);
+  }
+
+  .download-button i {
+    font-size: 1.1rem;
+  }
+
+  .additional-info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+  }
+
+  .info-box {
+    background: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 12px;
+    border-left: 4px solid #2e6e65;
+  }
+
+  .info-box h3 {
+    color: #2e6e65;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+  }
+
+  .info-box ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .info-box li {
+    color: #555;
+    margin-bottom: 0.5rem;
+    padding-left: 1.5rem;
+    position: relative;
+  }
+
+  .info-box li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: #2e6e65;
+    font-weight: bold;
+  }
+
+  .info-box p {
+    color: #555;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .contact-section {
+    margin-top: 3rem;
+  }
+
+  .contact-card {
+    background: linear-gradient(135deg, #2e6e65 0%, #4a9d93 100%);
+    color: white;
+    border-radius: 16px;
+    padding: 2rem;
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .contact-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .contact-card h3 {
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+  }
+
+  .contact-card p {
+    margin-bottom: 1.5rem;
+    opacity: 0.9;
+    line-height: 1.6;
+  }
+
+  .contact-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: white;
+    color: #2e6e65;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
+
+  .contact-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  }
+
+  @media (max-width: 768px) {
+    .stammoprotokoll-page {
+      padding: 1rem;
+    }
+
+    .page-header-section h1 {
+      font-size: 2rem;
+    }
+
+    .info-card {
+      flex-direction: column;
+      text-align: center;
+      padding: 1.5rem;
+    }
+
+    .protocol-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    .protocol-meta {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .additional-info {
+      grid-template-columns: 1fr;
+    }
+
+    .download-button {
+      font-size: 0.9rem;
+      padding: 0.6rem 1.2rem;
+    }
+  }
+
+  @media print {
+    .download-button {
+      display: none;
+    }
+
+    .protocol-card {
+      break-inside: avoid;
+      box-shadow: none;
+      border: 1px solid #ddd;
+    }
+  }
+</style>
+` %>
+
+<%- include('../../partials/content-template') %>

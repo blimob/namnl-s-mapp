@@ -1,0 +1,47 @@
+.stadgar-page {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: var(--spacing-xl);
+}
+
+.document-info {
+  background-color: var(--neutral-100);
+  padding: var(--spacing-md);
+  margin-bottom: var(--spacing-xl);
+  border-left: 4px solid var(--primary-color);
+}
+
+.stadgar-section {
+  margin-bottom: var(--spacing-xl);
+}
+
+.stadgar-section h2 {
+  color: var(--primary-color);
+  border-bottom: 2px solid var(--neutral-200);
+  padding-bottom: var(--spacing-sm);
+  margin-bottom: var(--spacing-lg);
+}
+
+.important-points {
+  background-color: var(--neutral-100);
+  padding: var(--spacing-lg);
+  border-radius: var(--border-radius-md);
+}
+
+.important-points li {
+  margin-bottom: var(--spacing-md);
+  position: relative;
+  padding-left: var(--spacing-lg);
+}
+
+.important-points li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: var(--primary-color);
+}
+
+.document-actions {
+  margin-top: var(--spacing-xxl);
+  text-align: center;
+}

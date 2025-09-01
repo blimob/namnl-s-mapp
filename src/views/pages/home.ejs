@@ -1,0 +1,96 @@
+<!-- Hero section -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-text">
+        <h1>Välkommen till BRF Råstenen Mitt</h1>
+        <p>Vi är en bostadsrättsförening med 16 lägenheter i ett trivsamt område. Här hittar du information om vår förening, nyheter och viktiga dokument.</p>
+
+        <a href="./om-oss" class="btn">Läs mer om föreningen</a>
+      </div>
+      <div class="hero-image">
+        <img src="./images/BRF.png" alt="BRF Råstenen Mitt's fastighet" onerror="this.src='/public/images/BRF.png'; this.onerror=null;">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Latest news section -->
+<section class="section news-section">
+  <div class="container">
+    <div class="section-header">
+      <h2>Senaste nytt</h2>
+    </div>
+    
+    <div class="news-grid">
+      <% if (locals.latestNews && latestNews.length > 0) { %>
+        <% latestNews.forEach(item => { %>
+          <div class="news-card">
+            <div class="news-content">
+              <div class="news-date"><%= new Date(item.publishDate).toLocaleDateString('sv-SE') %></div>
+              <h3 class="news-title"><%= item.title %></h3>
+              <!-- Använd det faktiska innehållet istället för sammanfattning med begränsad längd -->
+              <p class="news-excerpt">
+                <% 
+                  // Begränsa innehållet till 200 tecken med ellipsis om längre
+                  const maxLength = 200;
+                  const displayContent = item.content.length > maxLength 
+                    ? item.content.substring(0, maxLength) + '...' 
+                    : item.content;
+                %>
+                <%= displayContent %>
+              </p>
+              <a href="./nyheter" class="read-more">Läs mer</a>
+            </div>
+          </div>
+        <% }); %>
+      <% } else { %>
+        <div class="news-card">
+          <div class="news-content">
+            <h3 class="news-title">Inga nyheter ännu</h3>
+            <p class="news-excerpt">Det finns inga nyheter att visa just nu.</p>
+          </div>
+        </div>
+      <% } %>
+    </div>
+  </div>
+</section>
+
+<!-- Quick links / Important documents -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <h2>Viktiga dokument</h2>
+    </div>
+    
+    <div class="documents-grid">
+      <div class="document-card">
+        <div class="document-icon">📜</div>
+        <h3 class="document-title">Stadgar</h3>
+        <p>Föreningens stadgar</p>
+        <a href="./dokument/stadgar" class="read-more">Visa</a>
+      </div>
+      
+      <div class="document-card">
+        <div class="document-icon">📊</div>
+        <h3 class="document-title">Årsredovisning</h3>
+        <p>Senaste årsredovisningen</p>
+        <a href="./dokument/arsredovisning" class="read-more">Visa</a>
+      </div>
+      
+      <div class="document-card">
+        <div class="document-icon">📝</div>
+        <h3 class="document-title">Stämmoprotokoll</h3>
+        <p>Protokoll från senaste årsstämman</p>
+        <a href="./dokument/stammoprotokoll" class="read-more">Visa</a>
+      </div>
+      
+      <div class="document-card">
+        <div class="document-icon">📋</div>
+        <h3 class="document-title">Trivselregler</h3>
+        <p>Föreningens trivselregler</p>
+        <a href="./om-oss/trivselregler" class="read-more">Visa</a>
+      </div>
+    </div>
+  </div>
+</section>

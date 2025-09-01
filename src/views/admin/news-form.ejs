@@ -1,0 +1,93 @@
+<!-- src/views/admin/news-form.ejs -->
+<div class="admin-container">
+  <h1><%= news ? 'Redigera nyhet' : 'Skapa ny nyhet' %></h1>
+  
+  <% if (locals.error) { %>
+    <div class="alert alert-danger">
+      <%= error %>
+    </div>
+  <% } %>
+ 
+  <form action="/admin/nyheter<%= news ? `/${news._id}/uppdatera` : '/ny' %>" method="POST">
+    <div class="form-group">
+      <label for="title">Titel</label>
+      <input type="text" id="title" name="title" required 
+             value="<%= news ? news.title : '' %>">
+    </div>
+    
+    <div class="form-group">
+      <label for="content">Innehåll</label>
+      <textarea id="content" name="content" rows="10" required><%= news ? news.content : '' %></textarea>
+      <small class="form-text text-muted">Detta innehåll kommer att visas både på förstasidan och på nyhetssidan.</small>
+    </div>
+    
+    <div class="form-row">
+      <div class="form-group">
+        <label for="publishDate">Publiceringsdatum</label>
+        <input type="date" id="publishDate" name="publishDate" required
+               value="<%= news ? new Date(news.publishDate).toISOString().split('T')[0] : new Date().toISOString().split('T')[0] %>">
+      </div>
+      
+      <div class="form-group">
+        <label for="visibleUntil">Synlig till</label>
+        <% 
+          let defaultVisibleUntil = new Date();
+          defaultVisibleUntil.setDate(defaultVisibleUntil.getDate() + 30);
+        %>
+        <input type="date" id="visibleUntil" name="visibleUntil" required
+               value="<%= news ? new Date(news.visibleUntil).toISOString().split('T')[0] : defaultVisibleUntil.toISOString().split('T')[0] %>">
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <label for="author">Författare</label>
+      <input type="text" id="author" name="author" 
+             value="<%= news ? news.author : (locals.user ? user.email : 'Styrelsen') %>">
+    </div>
+    
+    <div class="form-group">
+      <label class="checkbox-label">
+        <input type="checkbox" name="isPublished" <%= news && news.isPublished ? 'checked' : '' %>> Publicerad
+      </label>
+    </div>
+    
+    <div class="form-buttons">
+      <button type="submit" class="btn btn-primary"><%= news ? 'Uppdatera' : 'Skapa' %> nyhet</button>
+      <a href="/admin/nyheter" class="btn btn-secondary">Avbryt</a>
+    </div>
+  </form>
+</div>
+
+<style>
+  .admin-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  h1 { margin-bottom: 20px; }
+  .form-group { margin-bottom: 15px; }
+  .form-group label { display: block; margin-bottom: 5px; font-weight: bold; }
+  .form-group input, .form-group textarea {
+    width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;
+  }
+  .form-row { display: flex; gap: 15px; margin-bottom: 15px; }
+  .form-row .form-group { flex: 1; }
+  .form-buttons { margin-top: 20px; display: flex; gap: 10px; }
+  .btn {
+    padding: 8px 16px; border: none; border-radius: 4px;
+    cursor: pointer; font-weight: bold; text-decoration: none; display: inline-block;
+  }
+  .btn-primary { background-color: #2E6E65; color: white; }
+  .btn-secondary { background-color:#D86E53; color: white; }
+  .checkbox-label { display: flex; align-items: center; gap: 5px; }
+  .checkbox-label input { width: auto; }
+  .alert {
+    padding: 15px; margin-bottom: 20px; border: 1px solid transparent; border-radius: 4px;
+  }
+  .alert-danger {
+    background-color: #f8d7da; border-color: #f5c6cb; color: #721c24;
+  }
+  .form-text {
+    color: #6c757d; font-size: 0.875rem; margin-top: 5px;
+  }
+</style>

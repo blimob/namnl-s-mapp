@@ -1,0 +1,68 @@
+version: '3.8'
+
+services:
+  mongo:
+    image: mongo:7
+    container_name: brf-rastenen-mongo-prod
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data_prod:/data/db
+    environment:
+      MONGO_INITDB_DATABASE: brf-rastenen
+    restart: unless-stopped
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: brf-rastenen-app-prod
+    environment:
+      FIREBASE_API_KEY: AIzaSyA_jBNRAHJw2XCzebLnD4GxrUoQ-E2zCWE
+      FIREBASE_AUTH_DOMAIN: brf-r-b4c2e.firebaseapp.com
+      MONGODB_URL: mongodb://mongo:27017/brf-rastenen
+      NODE_ENV: production
+      PORT: 3005
+      BASE_URL: /
+      SESSION_SECRET: super_secure_session_key_production_123
+      FIREBASE_PROJECT_ID: brf-r-b4c2e
+      FIREBASE_CLIENT_EMAIL: firebase-adminsdk-fbsvc@brf-r-b4c2e.iam.gserviceaccount.com
+      FIREBASE_CLIENT_ID: 100803361945113876037
+      FIREBASE_PRIVATE_KEY_ID: 32efd422f9fc1b1a10ad4e2ad8a5e8e0894c8ff8
+      FIREBASE_PRIVATE_KEY: |
+        -----BEGIN PRIVATE KEY-----
+        MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCm2IHo6kBE/8ns
+        +RzE6qdLsmvNfj8oGuhXPKM0rsOL9IhPk1qmHTA9TErA6zq+CxHlnNSCfyNMxmvQ
+        UI3zDABOOac6kalH3NIBrSC+vXTMqxjq+QAK3EMXEyE9cCNZXTpr50U0TD0q6TZe
+        XslzrlndZCFduOdZf5MN4iFmFLTo3j4+Mfe02XRA4X8QeBEwW7qFv2PZDwmrI4i6
+        92wWgC7Ugo7020PM7dbQogXW+G7WAg4PnVpuUTg2wo67W4T3eoCWFMvDJzEnlr8v
+        2aIV7gWy56aUSwdrjX2NzfVM33zMXHnpnwwLyuYo9YjdHARHxGlHwKFjCU745LUR
+        fHg/ed1JAgMBAAECgf8zyLkifPPbRGkQFL16zPg4x7B1KQ8I4ZW2DFAaE8JXspUt
+        T726dgGbVBM0A38/NElw08YxRnLNW4PPvH1aL5YlZMtjjnxblYcHoxwIqzziZlAY
+        NF6VmWnk2+goBS/w4GOhOvPS4+6Ea5pyV3El6zYHno5VqM9nU4EWJHZaQ9JZVEpE
+        7MIw0o/fA+zcxckpaOk0dKN+ay+gkmEV9qxqdKHG5M3cbCWulqrQOXTtk/K/4Str
+        EHxixCfwmRR8zfQ8QFUzTOsaAK9OsH+qLDrLDx9x64Cls4/KBr2BbvUnXB1t645n
+        vDd55k/vACTDoTnxvDTWRMijogC7kGHJE2A0ucECgYEA6RceCVTw3SBaCfr0SVza
+        1UsoASMZCuvMUMsZONpKjjSzPRp0c4s4kP880/cuBYW54nqz7Pa3BcNQAttYRK5s
+        9wom4fmN2f4J3VZC3yluPCzbuX2W5cMaa5DQLJvtIuKx6FTwJA75i21Mi4qFSEe9
+        k3ErNZDcW+FVrTntXIBFqGkCgYEAtz6VMOPYUHfgpBIttxTH92seA4U08tD2Dxjs
+        FmTjsEzWeVB1Whz56IqBYTaUNkkwV10NrPx1GhAYbUpd85qCHJCB1nTHvdhvuJfC
+        f2ggfy68GqBhd0J+TUywS2EDH3XH2DQGfi3zV8ydEugdrYl0hG1UUfPK8CMtI/7f
+        gpJG8eECgYEAl16r4uOGiBO6ZUDT49CpTFrCX/qrCKyYwt8iQgmA4VjYDZZgiaif
+        04nttrmO6YcucCW/MuQFd3ifPTu01uVvXf75wUaPGEIhpdufEc2WCP4Ysx0cIZnS
+        Toh8qHuaRE1zu61tRf1zkVgpnXUXmRj9xAJ6TQ8GC6UKPrSfsLKcigECgYEAtFQE
+        IZ63S0kNaqjxEBCFUPi7Cp/WIXZ+DxFplAgpAWA8WBpTwiBt1ugmtnItnNadmfva
+        73dqDgH05+idWJOeo1maTF+UCUGrgC7omtTv1fk558IY6HIpNQzZGPUZS6Zuylc4
+        ZIf3x1l24hpGynZQkdm9dwDBn1wemiPB9Q7afkECgYEA59BuSpPJc6ZRA9Izns3r
+        SgcbTx6O64M1QoC2/JYqHCo1skzVjl57/s1D+9JimrhiTs2YFLW54+swhhH7sAKt
+        t5aHn8jarfFvvGZO96tKQ0q5Upy8DsLmKBccGh67xiiDRzrU5aajiGiFLG2c2Zel
+        ZxhCyx83B262IPfyYxt/VXM=
+        -----END PRIVATE KEY-----
+    ports:
+      - "3005:3005"
+    depends_on:
+      - mongo
+    restart: unless-stopped
+
+volumes:
+  mongodb_data_prod:

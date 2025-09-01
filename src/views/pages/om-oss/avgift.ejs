@@ -1,0 +1,544 @@
+<% title = ''; %>
+<% currentPage = '/om-oss/avgift'; %>
+
+<% body = `
+<div class="avgift-page">
+  <div class="page-header-section">
+    <h1>Månadsavgift och avier</h1>
+    <p class="page-description">Information om månadsavgifter, betalning och vad din avgift går till</p>
+  </div>
+
+  <div class="info-section">
+    <div class="info-card primary">
+      <div class="info-content">
+        <h2>Vad är månadsavgiften?</h2>
+        <p>Som medlem i bostadsrättsföreningen betalar du en månadsavgift som täcker föreningens gemensamma kostnader. Detta är din del av föreningens totala driftskostnader.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="apartment-section">
+    <h2>Avgift per lägenhetsstorlek</h2>
+    <p class="section-intro">Avgiften varierar beroende på lägenhetens storlek och andelstal. Vår förening består av totalt 16 lägenheter fördelade på två hus.</p>
+    
+    <div class="apartment-grid">
+      <div class="apartment-card">
+        <div class="apartment-header">
+          <span class="apartment-size">4 RoK</span>
+          <span class="apartment-count">8 lägenheter</span>
+        </div>
+        <div class="apartment-details">
+          <p class="area">78 kvm</p>
+          <p class="description">Våra största lägenheter med fyra rum och kök</p>
+          <a href="../images/4rok.png" target="_blank" class="floor-plan-link">
+            <i class="fa-solid fa-image"></i>
+            Se planlösning
+          </a>
+        </div>
+      </div>
+
+      <div class="apartment-card">
+        <div class="apartment-header">
+          <span class="apartment-size">3 RoK</span>
+          <span class="apartment-count">6 lägenheter</span>
+        </div>
+        <div class="apartment-details">
+          <p class="area">68 kvm</p>
+          <p class="description">Trivsamma trerummare perfekta för familjer</p>
+          <a href="../images/3rok.png" target="_blank" class="floor-plan-link">
+            <i class="fa-solid fa-image"></i>
+            Se planlösning
+          </a>
+        </div>
+      </div>
+
+      <div class="apartment-card">
+        <div class="apartment-header">
+          <span class="apartment-size">2 RoK</span>
+          <span class="apartment-count">2 lägenheter</span>
+        </div>
+        <div class="apartment-details">
+          <p class="area">64 kvm</p>
+          <p class="description">Effektiva tvårummare med smart planlösning</p>
+          <a href="../images/2rok.png" target="_blank" class="floor-plan-link">
+            <i class="fa-solid fa-image"></i>
+            Se planlösning
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-note">
+      <i class="fa-solid fa-info-circle"></i>
+      <p>Större lägenheter har högre månadsavgift eftersom de har en större andel av föreningens totala yta och därmed står för en större del av kostnaderna.</p>
+    </div>
+  </div>
+
+  <div class="payment-section">
+    <h2>Avier och betalning</h2>
+    
+    <div class="payment-info-grid">
+      <div class="payment-card">
+        <div class="payment-icon">📧</div>
+        <h3>Aviutskick</h3>
+        <p>Månadsavier skickas ut via e-post i början av varje månad från vår ekonomiska förvaltare.</p>
+      </div>
+
+      <div class="payment-card">
+        <div class="payment-icon">📅</div>
+        <h3>Förfallodatum</h3>
+        <p>Betalning ska ske senast det datum som anges på avin, vanligtvis sista vardagen i månaden.</p>
+      </div>
+
+      <div class="payment-card">
+        <div class="payment-icon">🏢</div>
+        <h3>Ekonomisk förvaltning</h3>
+        <p>A.R.C Fastighetspartner sköter vår ekonomiska förvaltning och hanterar alla avier.</p>
+      </div>
+    </div>
+
+    <div class="payment-reminder">
+      <h3>Kom ihåg!</h3>
+      <ul>
+        <li>Betala alltid i tid för att undvika påminnelseavgifter</li>
+        <li>Använd rätt OCR-nummer vid betalning</li>
+        <li>Meddela förvaltaren om du byter e-postadress</li>
+        <li>Autogiro är ett smidigt sätt att aldrig missa en betalning</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="contact-section">
+    <div class="contact-card">
+      <div class="contact-icon">💬</div>
+      <h3>Har du frågor om din avgift?</h3>
+      <p>Vid frågor om avier, betalning eller månadsavgift, kontakta vår ekonomiska förvaltare på A.R.C Fastighetspartner.</p>
+      <div class="contact-buttons">
+        <a href="mailto:info@arcfastighetspartner.se" class="contact-button primary">
+          📧 Kontakta A.R.C Fastighetspartner
+        </a>
+        <a href="mailto:rastenenmittkalmar@hotmail.com" class="contact-button secondary">
+          📧 Kontakta styrelsen
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .avgift-page {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+
+  .page-header-section {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .page-header-section h1 {
+    color: #2e6e65;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+  }
+
+  .page-description {
+    color: #666;
+    font-size: 1.1rem;
+    line-height: 1.6;
+  }
+
+  .info-section {
+    margin-bottom: 3rem;
+  }
+
+  .info-card {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+  }
+
+  .info-card.primary {
+    background: linear-gradient(135deg, #f8fffe 0%, #f0f9f8 100%);
+    border: 1px solid rgba(46, 110, 101, 0.2);
+  }
+
+  .info-icon {
+    font-size: 3rem;
+    flex-shrink: 0;
+  }
+
+  .info-content h2 {
+    color: #2e6e65;
+    margin-bottom: 0.5rem;
+    font-size: 1.5rem;
+  }
+
+  .info-content p {
+    color: #555;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .cost-breakdown {
+    margin-bottom: 3rem;
+  }
+
+  .cost-breakdown h2 {
+    color: #2e6e65;
+    margin-bottom: 2rem;
+    text-align: center;
+    font-size: 1.8rem;
+  }
+
+  .cost-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .cost-item {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+  }
+
+  .cost-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+  }
+
+  .cost-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .cost-item h4 {
+    color: #2e6e65;
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+  }
+
+  .cost-item p {
+    color: #666;
+    font-size: 0.9rem;
+    margin: 0;
+    line-height: 1.4;
+  }
+
+  .apartment-section {
+    margin-bottom: 3rem;
+  }
+
+  .apartment-section h2 {
+    color: #2e6e65;
+    margin-bottom: 1rem;
+    text-align: center;
+    font-size: 1.8rem;
+  }
+
+  .section-intro {
+    text-align: center;
+    color: #666;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+  }
+
+  .apartment-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .apartment-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+  }
+
+  .apartment-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+  }
+
+  .apartment-header {
+    background: linear-gradient(135deg, #2e6e65 0%, #4a9d93 100%);
+    color: white;
+    padding: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .apartment-size {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+
+  .apartment-count {
+    background: rgba(255,255,255,0.2);
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+  }
+
+  .apartment-details {
+    padding: 1.5rem;
+  }
+
+  .area {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #2e6e65;
+    margin-bottom: 0.5rem;
+  }
+
+  .description {
+    color: #666;
+    margin-bottom: 1rem;
+    line-height: 1.5;
+  }
+
+  .floor-plan-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #2e6e65;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
+
+  .floor-plan-link:hover {
+    color: #246054;
+    transform: translateX(3px);
+  }
+
+  .info-note {
+    background: #f8f9fa;
+    border-left: 4px solid #2e6e65;
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    display: flex;
+    gap: 1rem;
+    align-items: start;
+  }
+
+  .info-note i {
+    color: #2e6e65;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+    margin-top: 0.2rem;
+  }
+
+  .info-note p {
+    color: #555;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .payment-section {
+    margin-bottom: 3rem;
+  }
+
+  .payment-section h2 {
+    color: #2e6e65;
+    margin-bottom: 2rem;
+    text-align: center;
+    font-size: 1.8rem;
+  }
+
+  .payment-info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .payment-card {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+
+  .payment-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .payment-card h3 {
+    color: #2e6e65;
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+  }
+
+  .payment-card p {
+    color: #666;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .payment-reminder {
+    background: #fff3cd;
+    border: 1px solid #ffeaa7;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  .payment-reminder h3 {
+    color: #856404;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+  }
+
+  .payment-reminder ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .payment-reminder li {
+    color: #856404;
+    margin-bottom: 0.5rem;
+    padding-left: 1.5rem;
+    position: relative;
+  }
+
+  .payment-reminder li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    font-weight: bold;
+  }
+
+  .contact-section {
+    margin-top: 3rem;
+  }
+
+  .contact-card {
+    background: linear-gradient(135deg, #2e6e65 0%, #4a9d93 100%);
+    color: white;
+    border-radius: 16px;
+    padding: 2rem;
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .contact-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .contact-card h3 {
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+  }
+
+  .contact-card p {
+    margin-bottom: 1.5rem;
+    opacity: 0.9;
+    line-height: 1.6;
+  }
+
+  .contact-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .contact-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
+
+  .contact-button.primary {
+    background: white;
+    color: #2e6e65;
+  }
+
+  .contact-button.secondary {
+    background: rgba(255,255,255,0.2);
+    color: white;
+    border: 1px solid rgba(255,255,255,0.3);
+  }
+
+  .contact-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  }
+
+  @media (max-width: 768px) {
+    .avgift-page {
+      padding: 1rem;
+    }
+
+    .page-header-section h1 {
+      font-size: 2rem;
+    }
+
+    .info-card {
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .cost-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .apartment-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .payment-info-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .contact-buttons {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .contact-button {
+      justify-content: center;
+    }
+  }
+
+  @media print {
+    .floor-plan-link,
+    .contact-section {
+      display: none;
+    }
+
+    .apartment-card,
+    .cost-item,
+    .payment-card {
+      break-inside: avoid;
+    }
+  }
+</style>
+` %>
+
+<%- include('../../partials/content-template') %>

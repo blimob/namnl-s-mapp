@@ -1,0 +1,277 @@
+<!-- src/views/pages/nyheter.ejs -->
+<section class="page-header">
+  <div class="container">
+    <div class="page-header-inner"></div>
+    <div class="header-content">
+      <h1>Nyheter från BRF Råstenen Mitt</h1>
+      <p class="subtitle">Håll dig uppdaterad med det senaste från föreningen</p>
+    </div>
+    
+    <% if (locals.error) { %>
+      <div class="alert alert-danger">
+        <%= error %>
+      </div>
+    <% } %>
+
+    <% if (news && news.length > 0) { %>
+      <div class="news-grid">
+        <% news.forEach((item, index) => { %>
+          <article class="news-item <%= index === 0 ? 'featured' : '' %>">
+            <div class="news-header">
+              <h2><%= item.title %></h2>
+              <div class="news-badge">
+                <span class="badge-text">Nyhet</span>
+              </div>
+            </div>
+            
+            <div class="news-content">
+              <%- item.content %>
+            </div>
+
+            <div class="news-footer">
+              <div class="news-meta">
+                <div class="meta-item publication-date">
+                  <%= new Date(item.publishDate).toLocaleDateString('sv-SE', { 
+                    year: 'numeric', 
+                    month: 'long', 
+                    day: 'numeric' 
+                  }) %>
+                </div>
+                <div class="meta-item author">
+                  Av <%= item.author %>
+                </div>
+              </div>
+            </div>
+          </article>
+        <% }); %>
+      </div>
+    <% } else { %>
+      <div class="no-news">
+        <h3>Inga nyheter just nu</h3>
+        <p>Vi håller på att förbereda spännande nyheter för dig. Kom tillbaka snart!</p>
+      </div>
+    <% } %>
+  </div>
+</section>
+
+<style>
+  .page-header {
+    background: linear-gradient(135deg, #f8fffe 0%, #f0f9f8 100%);
+    padding: 3rem 0;
+  }
+
+  .header-content {
+    text-align: center;
+  }
+
+  .header-content h1 {
+    color: #2e6e65;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+  }
+
+  .subtitle {
+    color: #666;
+    font-size: 1.2rem;
+    margin: 0;
+    opacity: 0.8;
+  }
+
+  .news-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin-top: 2rem;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .news-item {
+    background: white;
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    border: 1px solid rgba(46, 110, 101, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .news-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #2e6e65, #4a9d93);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+  }
+
+  .news-item:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+  }
+
+  .news-item:hover::before {
+    transform: scaleX(1);
+  }
+
+  .news-item.featured {
+    background: linear-gradient(135deg, #fff 0%, #f8fffe 100%);
+    border: 2px solid #2e6e65;
+    transform: scale(1.02);
+  }
+
+  .news-item.featured::before {
+    transform: scaleX(1);
+    height: 6px;
+  }
+
+  .news-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1.5rem;
+    gap: 1rem;
+  }
+  
+  .news-item h2 {
+    margin: 0;
+    color: #2e6e65;
+    font-size: 1.5rem;
+    font-weight: 600;
+    line-height: 1.3;
+    flex: 1;
+  }
+
+  .news-badge {
+    background: #2e6e65;
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    flex-shrink: 0;
+  }
+
+  .news-item.featured .news-badge {
+    background: linear-gradient(135deg, #2e6e65, #4a9d93);
+    box-shadow: 0 2px 8px rgba(46, 110, 101, 0.3);
+  }
+  
+  .news-content {
+    line-height: 1.7;
+    color: #444;
+    margin-bottom: 1.5rem;
+  }
+
+  .news-content p {
+    margin-bottom: 1rem;
+  }
+
+  .news-content p:last-child {
+    margin-bottom: 0;
+  }
+
+  .news-footer {
+    border-top: 1px solid #eee;
+    padding-top: 1rem;
+    margin-top: 1rem;
+  }
+
+  .news-meta {
+    display: flex;
+    justify-content: space-between;
+    color: #666;
+    font-size: 0.9rem;
+  }
+
+  .publication-date {
+    opacity: 0.7;
+  }
+
+  .author {
+    font-weight: 500;
+  }
+
+  .no-news {
+    text-align: center;
+    padding: 4rem 2rem;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    max-width: 500px;
+    margin: 2rem auto;
+  }
+
+  .no-news h3 {
+    color: #2e6e65;
+    margin-bottom: 1rem;
+  }
+
+  .no-news p {
+    color: #666;
+    margin: 0;
+  }
+  
+  .alert {
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .alert-danger {
+    background: linear-gradient(135deg, #fef2f2, #fee2e2);
+    border: 1px solid #fecaca;
+    color: #991b1b;
+  }
+
+  @media (max-width: 768px) {
+    .page-header {
+      padding: 2rem 0;
+    }
+
+    .header-content h1 {
+      font-size: 2rem;
+    }
+
+    .subtitle {
+      font-size: 1rem;
+    }
+
+    .news-item {
+      padding: 1.5rem;
+    }
+
+    .news-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .news-meta {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .news-item h2 {
+      font-size: 1.3rem;
+    }
+
+    .no-news {
+      padding: 3rem 1.5rem;
+    }
+  }
+</style>
